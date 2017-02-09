@@ -1,6 +1,6 @@
 # Chat
 
-<img src="screenshot.png?raw=true" />
+<img src="img/screenshot.png?raw=true" />
 
 *Petit chat en php et js*
 
@@ -22,6 +22,7 @@
      * Classe Database
      * Classe Sessions (non terminée)
      * Migration d'une partie du code en POO
+     * Ajout fonction ajax recup messages
 
 * **07/02/2017**
      * Structure du projet
