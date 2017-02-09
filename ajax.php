@@ -1,0 +1,39 @@
+<?php
+// On definit le type de contenu qu'on va renvoyer et l'encodage
+header('Content-Type: application/json; charset=utf-8');
+
+// Petite fonction qui nous permet d'afficher une erreur
+function showError($msg) {
+     echo json_encode(array('error' => $msg));
+     exit;
+}
+
+// Si aucune action demandée
+if (empty($_GET['action'])) {
+     showError("Aucune action demandée");
+}
+
+// Nos inclusions
+require_once ("core/Database.php");
+require_once ("core/Users.php");
+require_once ("core/Sessions.php");
+require_once ("core/Chat.php");
+
+// On traite l'action demandée
+switch ($_GET['action']) {
+     case 'getMessages' :
+          echo Chat::getMessages();
+          break;
+     case 'sendMessage' :
+          break;
+     case 'login' :
+          break;
+     case 'logout' :
+          break;
+     case 'getOnlineUsersCount' :
+          break;
+     case 'getOnlineUsersList' :
+          break;
+     default :
+          showError("Action invalide");
+}
