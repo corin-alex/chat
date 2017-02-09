@@ -1,5 +1,5 @@
 # Chat
-*Petit chat en ajax*
+*Petit chat en php et js*
 
 ## Colaborateurs
 * Emilie Letailleur
