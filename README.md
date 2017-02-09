@@ -1,4 +1,7 @@
 # Chat
+
+<img src="screenshot.png?raw=true" />
+
 *Petit chat en php et js*
 
 ## Colaborateurs
