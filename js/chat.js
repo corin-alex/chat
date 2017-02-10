@@ -4,7 +4,7 @@ function getMessages() {
           url:"ajax.php",
           dataType:"json",
           data: {"action": "getMessages"},
-          success:function(msg){
+          success: function(msg) {
                if(msg){
                     var result = "";
                     for (var i = 0; i < msg.length; i++) {
@@ -18,5 +18,21 @@ function getMessages() {
                     $("#msg_list").html(result);
                }
           }
-     })
+     });
+}
+
+function sendMessage() {
+     var uid = $("#userSelect").val();
+     var msg = $("#msgInput").val().trim();
+
+     $.ajax({
+          type:"GET",
+          url:"ajax.php",
+          dataType:"json",
+          data: {"action": "sendMessage", "user": uid, "msg": msg},
+          success: function(msg) {
+               getMessages();
+               $("#msgInput").val("");
+          }
+     });
 }

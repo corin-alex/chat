@@ -30,7 +30,7 @@
 
                          <div class="row">
                               <div class="col-sm-2">
-                                   <select class="form-control">
+                                   <select id="userSelect" class="form-control">
                                         <option value="0">Utilisateur</option>
                                         <option value="1">Qhorin</option>
                                         <option value="2">Emi</option>
@@ -38,10 +38,10 @@
                                    </select>
                               </div>
                               <div class="col-sm-8">
-                                   <input type="text" class="form-control">
+                                   <input id="msgInput" type="text" class="form-control">
                               </div>
                               <div class="col-sm-2">
-                                   <button type="button" class="btn btn-primary">Envoyer</button>
+                                   <button id="sendButton" type="button" onclick="sendMessage(); return false;" class="btn btn-primary">Envoyer</button>
                               </div>
                          </div>
                     </div>

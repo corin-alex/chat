@@ -1,6 +1,6 @@
 <?php
 // On definit le type de contenu qu'on va renvoyer et l'encodage
-header('Content-Type: application/json; charset=utf-8');
+//header('Content-Type: application/json; charset=utf-8');
 
 // Petite fonction qui nous permet d'afficher une erreur
 function showError($msg) {
@@ -25,6 +25,15 @@ switch ($_GET['action']) {
           echo Chat::getMessages();
           break;
      case 'sendMessage' :
+          $user = $_GET['user'];
+          $msg = $_GET['msg'];
+
+          if (!empty($user) and !empty($msg))
+          {
+               Chat::sendMessage($user, $msg);
+          }
+          echo json_encode(array('message' => "1"));
+          exit;
           break;
      case 'login' :
           break;

@@ -11,8 +11,13 @@ final class Chat {
           // On récupère l'objet database
           $db = Database::getInstance();
 
+          
+          $count = $db->quickQuery("SELECT count(id) as c FROM messages")[0]->c;
+          $l = (($count - $limit) > 0) ?  $count - $limit : 0;
+          $limitQ = "LIMIT " .$l . ", " . $limit;
+
           // Requête pour récuperer les dernièrs messages
-          $messages = $db->quickQuery("SELECT * FROM messages ORDER BY `time` ASC LIMIT " . intval($limit));
+          $messages = $db->quickQuery("SELECT * FROM messages ORDER BY `time` ASC " . $limitQ);
 
           // Pour chaque message, on refait une requête afin de récuperer l'auteur
           // TODO : Formater la date
@@ -36,5 +41,17 @@ final class Chat {
 
           // On retourne le resultat au format json
           return json_encode($messages);
+     }
+
+     public static function sendMessage($userId, $msg) {
+          // On récupère l'objet database
+          $db = Database::getInstance();
+
+          $q = $db->prepare("INSERT INTO messages (`author`, `text`, `time`) VALUES (:id, :msg, :currentTime)");
+          $q->bindValue(":id", $userId, PDO::PARAM_INT);
+          $q->bindValue(":msg", trim(strip_tags($msg)), PDO::PARAM_STR);
+          $q->bindValue(":currentTime", time(), PDO::PARAM_INT);
+          $q->execute();
+
      }
 }
