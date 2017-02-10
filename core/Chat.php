@@ -29,6 +29,9 @@ final class Chat {
 
                // On ajoute les infos dans le param author du message courrant
                $messages[$i]->author = $author;
+
+               $messages[$i]->time = date("d/m H:i", $messages[$i]->time);
+
           }
 
           // On retourne le resultat au format json

@@ -12,7 +12,7 @@ function getMessages() {
                          var text = msg[i]['text'];
                          var time = msg[i]['time'];
 
-                         result += '<li class="list-group-item"><strong>' + name + " :</strong> " + text + " (" + time + ")</li>";
+                         result += '<li class="list-group-item">[' + time + '] - <strong>' + name + " :</strong> " + text + "</li>";
                     }
                     if(!result) result = "Aucun message";
                     $("#msg_list").html(result);
