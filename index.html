@@ -10,6 +10,13 @@
           <script type="text/javascript">
                $().ready(function() {
                     getMessages();
+                    setInterval(getMessages, 2000);
+
+                    $("#msgInput").keyup(function(e) {
+                         if(e.keyCode  == 13) {
+                              sendMessage();
+                         }
+                    })
                });
           </script>
 
@@ -19,9 +26,10 @@
      <body>
           <br><br>
           <section class="container">
+               <div class="center"><img class="logo" src="img/logo.png"></div>
                <div class="panel panel-primary">
                     <div class="panel-heading">
-                         <h3 class="panel-title">Chat</h3>
+                         <h3 class="panel-title">Chat (Alpha 1 Codename VirtualPoney2000)</h3>
                     </div>
                     <div class="panel-body">
                          <ul id="msg_list" class="list-group">
@@ -48,5 +56,9 @@
                     <div class="panel-footer">Utilisateur connectés : 0</div>
                </div>
           </section>
+          <footer class="center">
+               <strong>Créé par Sensei, Bocal, EmiTaylor &copy; 2017</strong>
+               <br><br>
+          </footer>
      </body>
 </html>
