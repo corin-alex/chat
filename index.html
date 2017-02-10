@@ -12,11 +12,15 @@
                     getMessages();
                     setInterval(getMessages, 2000);
 
+                    $('form').submit(function(e) {
+                         e.preventDefault();
+                    })
+
                     $("#msgInput").keyup(function(e) {
                          if(e.keyCode  == 13) {
                               sendMessage();
                          }
-                    })
+                    });
                });
           </script>
 
@@ -57,7 +61,7 @@
                </div>
           </section>
           <footer class="center">
-               <strong>Créé par Sensei, Bocal, EmiTaylor &copy; 2017</strong>
+               <strong>Créé par Sensei, MrBocal593, EmiTaylor &copy; 2017</strong>
                <br><br>
           </footer>
      </body>
