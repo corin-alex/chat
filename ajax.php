@@ -36,8 +36,13 @@ switch ($_GET['action']) {
           exit;
           break;
      case 'login' :
-          break;
-     case 'logout' :
+          $name = $_GET['name'];
+          $pwd = $_GET['password'];
+
+          if (!empty($name) and !empty($pwd))
+          {
+               echo json_encode(Users::loginOrCreate($name, $pwd));
+          }
           break;
      case 'getOnlineUsersCount' :
           break;

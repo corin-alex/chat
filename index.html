@@ -31,9 +31,23 @@
           <br><br>
           <section class="container">
                <div class="center"><img class="logo" src="img/logo.png"></div>
-               <div class="panel panel-primary">
+
+               <div class="panel panel-primary login-panel">
                     <div class="panel-heading">
-                         <h3 class="panel-title">Chat (Alpha 1 Codename VirtualPoney2000)</h3>
+                         <h3 class="panel-title">Connexion</h3>
+                    </div>
+                    <div class="panel-body">
+                         <div class="center"><strong>Si l'utilisateur n'existe pas, il sera automatiquement créé</strong></div><br>
+                         <input id="loginName" type="text" class="form-control" placeholder="Pseudo"><br>
+                         <input id="loginPassword" type="password" class="form-control" placeholder="Mot de passe"><br>
+                         <div class="center"><button type="button" class="btn btn-primary" onclick="login();">Connexion</div>
+                    </div>
+               </div>
+
+
+               <div class="panel panel-primary chat-panel">
+                    <div class="panel-heading">
+                         <h3 class="panel-title">Chat (Alpha 2 Codename VirtualPoney2000)</h3>
                     </div>
                     <div class="panel-body">
                          <ul id="msg_list" class="list-group">
@@ -42,12 +56,16 @@
 
                          <div class="row">
                               <div class="col-sm-2">
+                                   <strong id="username">Utilisateur</strong>
+                                   <input id="userSelect" type="hidden" value="0">
+                                   <!--
                                    <select id="userSelect" class="form-control">
                                         <option value="0">Utilisateur</option>
                                         <option value="1">Qhorin</option>
                                         <option value="2">Emi</option>
                                         <option value="3">Poney</option>
                                    </select>
+                                   -->
                               </div>
                               <div class="col-sm-8">
                                    <input id="msgInput" type="text" class="form-control">

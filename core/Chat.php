@@ -11,7 +11,7 @@ final class Chat {
           // On récupère l'objet database
           $db = Database::getInstance();
 
-          
+
           $count = $db->quickQuery("SELECT count(id) as c FROM messages")[0]->c;
           $l = (($count - $limit) > 0) ?  $count - $limit : 0;
           $limitQ = "LIMIT " .$l . ", " . $limit;
@@ -31,7 +31,7 @@ final class Chat {
                // On récupère le premier resultat
                // (normalement il devrait y en avoir qu'un seul)
                $author = $q->fetch();
-
+               $author->name = ucfirst($author->name);
                // On ajoute les infos dans le param author du message courrant
                $messages[$i]->author = $author;
 

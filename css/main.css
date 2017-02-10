@@ -6,3 +6,7 @@
      width: 256px;
      margin-bottom: 32px;
 }
+
+.chat-panel {
+     display: none;
+}

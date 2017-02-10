@@ -36,3 +36,22 @@ function sendMessage() {
           }
      });
 }
+
+function login() {
+     var name = $("#loginName").val().trim();
+     var pwd  = $("#loginPassword").val();
+
+     $.ajax({
+          type:"GET",
+          url:"ajax.php",
+          dataType:"json",
+          data: {"action": "login", "name": name, "password": pwd},
+          success: function(msg) {
+               $("#username").html(msg['name']);
+               $("#userSelect").val(msg['id']);
+
+               $(".login-panel").fadeOut('fast');
+               $(".chat-panel").fadeIn('fast');
+          }
+     });
+}
