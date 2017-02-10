@@ -22,7 +22,7 @@ require_once ("core/Chat.php");
 // On traite l'action demandée
 switch ($_GET['action']) {
      case 'getMessages' :
-          echo Chat::getMessages(5);
+          echo Chat::getMessages(25);
           break;
      case 'sendMessage' :
           $user = $_GET['user'];

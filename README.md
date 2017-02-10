@@ -18,6 +18,11 @@
 * PDO
 
 ## Changelog
+* **10/02/2017**
+     * Envoi des messages
+     * Login et création utilisateurs
+     * Refresh chat
+
 * **09/02/2017**
      * Classe Database
      * Classe Sessions (non terminée)

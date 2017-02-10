@@ -10,3 +10,10 @@
 .chat-panel {
      display: none;
 }
+
+#msg_list {
+     max-height: 200px;
+     height: 200px;
+     display: block;
+     overflow-y: scroll;
+}

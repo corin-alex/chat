@@ -16,6 +16,7 @@ function getMessages() {
                     }
                     if(!result) result = "Aucun message";
                     $("#msg_list").html(result);
+                    $("#msg_list").animate({ scrollTop:  500 }, 250);
                }
           }
      });
