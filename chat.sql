@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  127.0.0.1
--- Généré le :  Jeu 09 Février 2017 à 19:56
+-- Généré le :  Ven 10 Février 2017 à 14:44
 -- Version du serveur :  5.7.14
 -- Version de PHP :  7.0.10
 
@@ -33,15 +33,6 @@ CREATE TABLE `messages` (
   `time` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Contenu de la table `messages`
---
-
-INSERT INTO `messages` (`id`, `author`, `text`, `time`) VALUES
-(1, 1, 'Test', 1486669997),
-(2, 3, 'Salut', 1486669998),
-(3, 2, 'Coucou', 1486669999);
-
 -- --------------------------------------------------------
 
 --
@@ -51,18 +42,10 @@ INSERT INTO `messages` (`id`, `author`, `text`, `time`) VALUES
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(32) NOT NULL,
+  `password` varchar(40) NOT NULL,
   `picture` varchar(255) NOT NULL,
   `last_login` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Contenu de la table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `picture`, `last_login`) VALUES
-(1, 'Qhorin', '', 0),
-(2, 'Emi', '', 0),
-(3, 'Poney', '', 0);
 
 --
 -- Index pour les tables exportées
@@ -89,12 +72,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT pour la table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- Contraintes pour les tables exportées
 --
