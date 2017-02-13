@@ -6,12 +6,14 @@
           <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
           <script type="text/javascript" src="js/bootstrap.min.js"></script>
           <script type="text/javascript" src="js/chat.js"></script>
+          <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
           <script type="text/javascript">
                $().ready(function() {
                     getMessages();
-                    setInterval(getMessages, 2000);
-
+                    setInterval(getMessages, 4000);
+                    setInterval(getOnlineUsersList, 5000);
+                    setInterval(getOnlineUsersCount, 5000);
                     $('form').submit(function(e) {
                          e.preventDefault();
                     })
@@ -34,11 +36,8 @@
           <link rel="stylesheet" href="css/main.css">
      </head>
      <body>
-          <br><br>
-          <section class="container">
-               <div class="center"><img class="logo" src="img/logo.png"></div>
-
-               <div class="panel panel-primary login-panel">
+          <section >
+               <div class="panel login-panel">
                     <div class="panel-heading">
                          <h3 class="panel-title">Connexion</h3>
                     </div>
@@ -46,47 +45,46 @@
                          <div class="center"><strong>Si l'utilisateur n'existe pas, il sera automatiquement créé</strong></div><br>
                          <input id="loginName" type="text" class="form-control" placeholder="Pseudo"><br>
                          <input id="loginPassword" type="password" class="form-control" placeholder="Mot de passe"><br>
-                         <div class="center"><button type="button" class="btn btn-primary" onclick="login();">Connexion</div>
+                         <div class="center"><button type="button" class="btn btn-default" onclick="login();">Connexion</div>
                     </div>
                </div>
 
+          </section>
 
-               <div class="panel panel-primary chat-panel">
-                    <div class="panel-heading">
-                         <h3 class="panel-title">Chat (Alpha 2.5 Codename VirtualPoney2000)</h3>
-                    </div>
-                    <div class="panel-body">
+          <section id="sidebar">
+               <header>
+               </header>
+
+               <section id="onlineuser">
+
+               </section>
+
+               <footer>
+                    Utilisateurs en ligne : 0
+               </footer>
+
+          </section>
+
+          <main>
+               <header>
+                    <h1>Virtual Pony 2000: Edition Tchat</h1>
+
+               </header>
+
+               <section>
                          <ul id="msg_list" class="list-group">
                               <li class="list-group-item"><strong>PoneyBot : </strong> Bienvenue</li>
                          </ul>
-
                          <div class="row">
                               <div class="col-sm-2">
-                                   <strong id="username">Utilisateur</strong>
                                    <input id="userSelect" type="hidden" value="0">
-                                   <!--
-                                   <select id="userSelect" class="form-control">
-                                        <option value="0">Utilisateur</option>
-                                        <option value="1">Qhorin</option>
-                                        <option value="2">Emi</option>
-                                        <option value="3">Poney</option>
-                                   </select>
-                                   -->
-                              </div>
-                              <div class="col-sm-8">
-                                   <input id="msgInput" type="text" class="form-control">
-                              </div>
-                              <div class="col-sm-2">
-                                   <button id="sendButton" type="button" onclick="sendMessage(); return false;" class="btn btn-primary">Envoyer</button>
                               </div>
                          </div>
-                    </div>
-                    <div class="panel-footer">Utilisateur connectés : 0</div>
+               </section>
+
+               <div id="form-input" >
+                    <input id="msgInput" class="form-control" type="text">
                </div>
-          </section>
-          <footer class="center">
-               <strong>Créé par Sensei, MrBocal593, EmiTaylor &copy; 2017</strong>
-               <br><br>
-          </footer>
+          </main>
      </body>
 </html>

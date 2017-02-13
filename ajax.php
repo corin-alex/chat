@@ -22,7 +22,7 @@ require_once ("core/Chat.php");
 // On traite l'action demandée
 switch ($_GET['action']) {
      case 'getMessages' :
-          echo Chat::getMessages(25);
+          echo Chat::getMessages(50);
           break;
      case 'sendMessage' :
           $user = $_GET['user'];
@@ -45,8 +45,10 @@ switch ($_GET['action']) {
           }
           break;
      case 'getOnlineUsersCount' :
+          echo json_encode(Users::getOnlineUsersCount());
           break;
      case 'getOnlineUsersList' :
+          echo json_encode(Users::getOnlineUsersList());
           break;
      default :
           showError("Action invalide");

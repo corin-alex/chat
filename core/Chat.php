@@ -7,7 +7,7 @@ final class Chat {
       * @param  int           $limit Limite de messages
       * @return string        json Result
       */
-     public static function getMessages($limit = 10) {
+     public static function getMessages($limit = 13) {
           // On récupère l'objet database
           $db = Database::getInstance();
 

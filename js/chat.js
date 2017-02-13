@@ -16,7 +16,7 @@ function getMessages() {
                     }
                     if(!result) result = "Aucun message";
                     $("#msg_list").html(result);
-                    $("#msg_list").animate({ scrollTop:  500 }, 250);
+                    $("#msg_list").animate({ scrollTop:  5000 }, 250);
                }
           }
      });
@@ -48,11 +48,53 @@ function login() {
           dataType:"json",
           data: {"action": "login", "name": name, "password": pwd},
           success: function(msg) {
-               $("#username").html(msg['name']);
+               $("#sidebar header").html(msg['name'] + '<img src="' + msg['picture'] + '">');
                $("#userSelect").val(msg['id']);
-
                $(".login-panel").fadeOut('fast');
-               $(".chat-panel").fadeIn('fast');
+               $("main, #sidebar").fadeIn('fast');
+               getOnlineUsersList();
+               getOnlineUsersCount();
+          }
+     });
+}
+function getOnlineUsersList() {
+     $.ajax({
+          type:"GET",
+          url:"ajax.php",
+          dataType:"json",
+          data: {"action": "getOnlineUsersList"},
+          success: function(msg) {
+               if(msg){
+                    var result = '<ul class="userlist">';
+                    for (var i = 0; i < msg.length; i++) {
+                         if (msg[i]['logged_in'])  {
+                              result += '<li class="logged_in">';
+                         }
+                         else {
+                              result += '<li>';
+                         }
+
+                         result += msg[i]['name'];
+
+                         result += "</li>";
+                    }
+                    result += "</ul>";
+                    $("#onlineuser").html(result);
+               }
+          }
+     });
+}
+
+function getOnlineUsersCount() {
+     $.ajax({
+          type:"GET",
+          url:"ajax.php",
+          dataType:"json",
+          data: {"action": "getOnlineUsersCount"},
+          success: function(msg) {
+               if(msg){
+                    $("#sidebar footer").html("Utilisateurs en ligne : " + msg['count']);
+               }
           }
      });
 }
