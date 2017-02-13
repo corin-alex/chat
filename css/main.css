@@ -1,109 +1,151 @@
-.center {
-     text-align: center;
+html,
+body {
+	height: 100%;
+	overflow: hidden;
+	font-family: 'Roboto', sans-serif;
+	background-color: #F8F8F8;
 }
 
-/*.logo {
-     width: 256px;
-     margin-bottom: 32px;
-}*/
+.center {
+	text-align: center;
+}
 
-main, #sidebar{
-     display: none;
+#chatbody {
+     height: 100%;
+	display: none;
 }
 
 #msg_list {
-     max-height: calc(100% - 2em);
-     display: block;
-     overflow-y: scroll;
-}
-
-#sidebar{
-     float: left;
-     width: 250px;
-     height: 100%;
-     background-color: #36393E;
-     color: #f3f3f3;
-}
-
-#sidebar header, #sidebar footer {
-     background-color:#282b30;
-     height: 4em;
-
-}
-
-#sidebar header img {
-     width: 48px;
-     float: right;
-     margin: 0.25em 0.5em;
-     border: 1px solid #888;
-     border-radius: 10%;
-}
-
-#sidebar footer{
-     text-align: center;
-     line-height: 4em;
-}
-
-#sidebar section{
-     height: calc(100% - 8em);
-}
-
-html,body{
-     height: 100%;
-     overflow: hidden;
-     font-family: 'Roboto', sans-serif;
-     /*background-color: #F3F3F3;*/
-}
-main{
-     background-color: white;
-     padding-left: 250px;
-}
-main header{
-     background-color: #F3F3F3;
-     height: 4em;
-     line-height: 4em;
-}
-
-main section{
-     height: calc(100vh - 7em);
-}
-#form-input{
-     height: 3em;
-     padding: 0 1em;
-}
-h1{
-     text-align: center;
-     margin: 0;
-     padding-top: 0.25em;
-     color: #666;
-}
-.panel-heading{
-     background-color: #F3F3F3;
-     height: auto;
-     width: 100%;
-     align-content: center;
-     text-align: center;
-
-}
- .login-panel {
-     width: 50%;
-     margin: auto;
-}
-
-.panel-body {
-     padding: 1em 12em;
-
-}
-
-
-.userlist {
+	height: calc(100% - 4em);
+     margin-top: 1em;
+     padding: 0 2em;
+	display: block;
+	overflow-y: scroll;
      list-style: none;
 }
 
-.userlist li {
-     color: #888;
+#msg_list li {
+     min-height: 3em;
 }
 
-li.logged_in {
-     color: #FFF;
+#msg_list em {
+     color: #888;
+     font-size: 0.8em;
 }
+
+#sidebar {
+	float: left;
+	width: 250px;
+	height: 100%;
+	background-color: #36393E;
+	color: #f3f3f3;
+}
+
+#sidebar header,
+#sidebar footer {
+	background-color: #282b30;
+	height: 4em;
+	line-height: 4em;
+}
+
+#sidebar header {
+	padding: 0 0.5em 0 1em;
+}
+
+#sidebar header span {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+#sidebar header img {
+	width: 48px;
+	float: right;
+	margin: 0.25em 0;
+	border: 1px solid #888;
+	border-radius: 10%;
+}
+
+#sidebar footer {
+	text-align: center;
+     color: #778899;
+}
+
+#sidebar section {
+	height: calc(100% - 8em);
+}
+
+main {
+	background-color: white;
+	padding-left: 250px;
+}
+
+main header {
+	height: 4em;
+	line-height: 4em;
+     padding: 0 1em;
+     border-bottom: 1px solid #CCC;
+}
+
+main header img {
+     height: 3em;
+}
+
+main section {
+	height: calc(100vh - 8em);
+}
+
+#form-input {
+	height: 3em;
+	padding: 0 1em;
+}
+
+#login-panel {
+	width: 640px;
+	margin: 2em auto;
+     padding: 2em;
+     background-color: white;
+}
+
+#login-panel img {
+     width: 256px;
+}
+
+.userlist {
+	list-style: none;
+	padding: 1em 0 0 1em;
+}
+
+.userlist li {
+	color: #888;
+	height: 2em;
+	line-height: 2em;
+	font-style: italic;
+}
+
+.bull {
+	display: inline-block;
+	border-radius: 100%;
+	background-color: #888;
+	width: 10px;
+	height: 10px;
+	margin-right: 0.5em;
+}
+
+li.user_online {
+	font-style: normal;
+	color: #DDD;
+}
+
+.bull_online {
+	background-color: #00AA00;
+}
+
+.msg_avatar, .msg_content {
+     display: inline-table;
+     vertical-align: top;
+}
+
+.msg_content {
+     padding: 0 1em;
+}
+

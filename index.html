@@ -2,7 +2,7 @@
 <html>
      <head>
           <meta charset="utf-8">
-          <title>Chat</title>
+          <title>Virtual Pony 2000</title>
           <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
           <script type="text/javascript" src="js/bootstrap.min.js"></script>
           <script type="text/javascript" src="js/chat.js"></script>
@@ -11,13 +11,14 @@
           <script type="text/javascript">
                $().ready(function() {
                     getMessages();
+                    
+                    // Refresh messages
                     setInterval(getMessages, 4000);
+                    
+                    // Refresh liste utilisateurs
                     setInterval(getOnlineUsersList, 5000);
-                    setInterval(getOnlineUsersCount, 5000);
-                    $('form').submit(function(e) {
-                         e.preventDefault();
-                    })
-
+                    
+                    // Evenements input (touche enter)
                     $("#msgInput").keyup(function(e) {
                          if(e.keyCode  == 13) {
                               sendMessage();
@@ -36,55 +37,43 @@
           <link rel="stylesheet" href="css/main.css">
      </head>
      <body>
-          <section >
-               <div class="panel login-panel">
-                    <div class="panel-heading">
-                         <h3 class="panel-title">Connexion</h3>
-                    </div>
-                    <div class="panel-body">
-                         <div class="center"><strong>Si l'utilisateur n'existe pas, il sera automatiquement créé</strong></div><br>
-                         <input id="loginName" type="text" class="form-control" placeholder="Pseudo"><br>
-                         <input id="loginPassword" type="password" class="form-control" placeholder="Mot de passe"><br>
-                         <div class="center"><button type="button" class="btn btn-default" onclick="login();">Connexion</div>
-                    </div>
-               </div>
-
+          <!-- Panel login -->
+          <section id="login-panel">
+               <div class="center"><img src="img/logo.png" alt="Virtual Pony 2000"></div><br><br>
+               <div class="center"><strong>Si l'utilisateur n'existe pas, il sera automatiquement créé</strong></div><br>
+               <input id="loginName" type="text" class="form-control" placeholder="Pseudo"><br>
+               <input id="loginPassword" type="password" class="form-control" placeholder="Mot de passe"><br>
+               <div class="center"><button type="button" class="btn btn-info" onclick="login();">Se connecter</div>
           </section>
 
-          <section id="sidebar">
-               <header>
-               </header>
-
-               <section id="onlineuser">
-
+          <!-- Chat -->
+          <div id="chatbody">
+               <section id="sidebar">
+                    <header></header>
+                    <section id="onlineuser"></section>
+                    <footer>Utilisateurs en ligne : 0</footer>
                </section>
-
-               <footer>
-                    Utilisateurs en ligne : 0
-               </footer>
-
-          </section>
-
-          <main>
-               <header>
-                    <h1>Virtual Pony 2000: Edition Tchat</h1>
-
-               </header>
-
-               <section>
-                         <ul id="msg_list" class="list-group">
-                              <li class="list-group-item"><strong>PoneyBot : </strong> Bienvenue</li>
-                         </ul>
-                         <div class="row">
-                              <div class="col-sm-2">
-                                   <input id="userSelect" type="hidden" value="0">
+   
+               <main>
+                    <header>
+                         <img src="img/logo.png" alt="Virtual Pony 2000">
+                         <strong>Alpha 3</strong>
+                    </header>
+     
+                    <section>
+                              <ul id="msg_list">
+                              </ul>
+                              <div class="row">
+                                   <div class="col-sm-2">
+                                        <input id="userSelect" type="hidden" value="0">
+                                   </div>
                               </div>
-                         </div>
-               </section>
-
-               <div id="form-input" >
-                    <input id="msgInput" class="form-control" type="text">
-               </div>
-          </main>
+                    </section>
+     
+                    <div id="form-input" >
+                         <input id="msgInput" class="form-control" type="text">
+                    </div>
+               </main>
+          </div>
      </body>
 </html>

@@ -18,6 +18,11 @@
 * PDO
 
 ## Changelog
+* **13/02/2017**
+     * Refonte graphique
+     * Ajout liste utilisateurs
+     * Optimisation de certaines parties du code
+     
 * **10/02/2017**
      * Envoi des messages
      * Login et création utilisateurs

@@ -44,9 +44,6 @@ switch ($_GET['action']) {
                echo json_encode(Users::loginOrCreate($name, $pwd));
           }
           break;
-     case 'getOnlineUsersCount' :
-          echo json_encode(Users::getOnlineUsersCount());
-          break;
      case 'getOnlineUsersList' :
           echo json_encode(Users::getOnlineUsersList());
           break;

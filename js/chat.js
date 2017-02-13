@@ -1,3 +1,6 @@
+/**
+ * Fonction pour recuperer les derniers messages
+ */
 function getMessages() {
      $.ajax({
           type:"GET",
@@ -8,11 +11,14 @@ function getMessages() {
                if(msg){
                     var result = "";
                     for (var i = 0; i < msg.length; i++) {
-                         var name = msg[i]['author']['name'];
-                         var text = msg[i]['text'];
-                         var time = msg[i]['time'];
-
-                         result += '<li class="list-group-item">[' + time + '] - <strong>' + name + " :</strong> " + text + "</li>";
+                         var name = msg[i].author.name;
+                         var picture = msg[i].author.picture;
+                         var text = msg[i].text;
+                         var time = msg[i].time;
+                         
+                         result += '<li><div class="msg_avatar">';
+                         result += (picture) ? '<img src="' + picture + '">' : '<img src="img/48x48.png">';
+                         result += '</div><div class="msg_content"><strong>' + name + "</strong> - <em>" + time + "</em><br>" + text + "<br><br></div></li>";
                     }
                     if(!result) result = "Aucun message";
                     $("#msg_list").html(result);
@@ -22,41 +28,53 @@ function getMessages() {
      });
 }
 
+/**
+ * Fonction pour envoyer un message
+ */
 function sendMessage() {
-     var uid = $("#userSelect").val();
-     var msg = $("#msgInput").val().trim();
-
      $.ajax({
           type:"GET",
           url:"ajax.php",
           dataType:"json",
-          data: {"action": "sendMessage", "user": uid, "msg": msg},
-          success: function(msg) {
+          data: {"action": "sendMessage",
+                 "user": $("#userSelect").val(),
+                 "msg": $("#msgInput").val().trim()},
+          success: function() {
                getMessages();
                $("#msgInput").val("");
           }
      });
 }
 
+/**
+ * Fonction de connexion utilisateur
+ */
 function login() {
-     var name = $("#loginName").val().trim();
-     var pwd  = $("#loginPassword").val();
-
      $.ajax({
           type:"GET",
           url:"ajax.php",
           dataType:"json",
-          data: {"action": "login", "name": name, "password": pwd},
+          data: {"action": "login",
+                 "name": $("#loginName").val().trim(),
+                 "password": $("#loginPassword").val()},
           success: function(msg) {
-               $("#sidebar header").html(msg['name'] + '<img src="' + msg['picture'] + '">');
-               $("#userSelect").val(msg['id']);
-               $(".login-panel").fadeOut('fast');
-               $("main, #sidebar").fadeIn('fast');
+               var headerContent = "<span>" + msg.name + "</span>";
+               headerContent += (msg.picture) ? '<img src="' + msg.picture + '">' : '<img src="img/48x48.png">';
+               
+               $("#sidebar header").html(headerContent);
+               $("#userSelect").val(msg.id);
+               $("#login-panel").fadeOut('fast', function() {
+                    $("#chatbody").delay(500).fadeIn('slow');
+               });
+               
                getOnlineUsersList();
-               getOnlineUsersCount();
           }
      });
 }
+
+/**
+ * Fonction pour afficher la liste des utilisateurs
+ */
 function getOnlineUsersList() {
      $.ajax({
           type:"GET",
@@ -65,35 +83,23 @@ function getOnlineUsersList() {
           data: {"action": "getOnlineUsersList"},
           success: function(msg) {
                if(msg){
-                    var result = '<ul class="userlist">';
+                    var result = '<ul class="userlist"><li>Utilisateurs enregistrés</li>';
+                    var count = 0;
                     for (var i = 0; i < msg.length; i++) {
-                         if (msg[i]['logged_in'])  {
-                              result += '<li class="logged_in">';
+                
+                         if (msg[i].logged_in)  {
+                              result += '<li class="user_online"><span class="bull bull_online"></span>';
+                              count++;
                          }
                          else {
-                              result += '<li>';
+                              result += '<li><span class="bull"></span>';
                          }
 
-                         result += msg[i]['name'];
-
-                         result += "</li>";
+                         result += msg[i].name + "</li>";
                     }
                     result += "</ul>";
                     $("#onlineuser").html(result);
-               }
-          }
-     });
-}
-
-function getOnlineUsersCount() {
-     $.ajax({
-          type:"GET",
-          url:"ajax.php",
-          dataType:"json",
-          data: {"action": "getOnlineUsersCount"},
-          success: function(msg) {
-               if(msg){
-                    $("#sidebar footer").html("Utilisateurs en ligne : " + msg['count']);
+                    $("#sidebar footer").html("Utilisateurs en ligne : " + count);
                }
           }
      });

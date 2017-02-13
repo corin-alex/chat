@@ -1,14 +1,20 @@
 <?php
 final class Users {
+     /**
+      * Méthode de connexion utilisateur
+      * Si l'utilisateur n'existe pas, il est automatiquement créé
+      */
      public static function loginOrCreate($name, $password) {
           // On récupère l'objet database
           $db = Database::getInstance();
 
+          // On cherche si le nom d'utilisateur existe
           $q = $db->prepare("SELECT id FROM users WHERE name = :name");
           $q->bindValue(":name", strtolower($name), PDO::PARAM_STR);
           $q->execute();
-
           $u = $q->fetch();
+          
+          // Si il n'existe pas, on le crée
           if (empty($u)) {
                $q = $db->prepare("INSERT INTO users (`name`, `password`, `picture`, `last_login`) VALUES (:name, :password, '', :currentTime)");
                $q->bindValue(":name", trim(strtolower($name)), PDO::PARAM_STR);
@@ -17,13 +23,15 @@ final class Users {
                $q->execute();
           }
 
+          // Dans tous les cas on check le mdp
           $q = $db->prepare("SELECT id, name, picture, last_login FROM users WHERE name = :name AND password = :password");
           $q->bindValue(":name", strtolower($name), PDO::PARAM_STR);
           $q->bindValue(":password", sha1($password), PDO::PARAM_STR);
           $q->execute();
-
           $u = $q->fetch();
 
+          // Si l'user et le mdp correspondent, on met à jour le temps de dernière connexion
+          // et on renvoi les infos concernant l'utilisateur
           if (!empty($u)) {
                $q = $db->prepare("UPDATE users SET last_login=:currentTime WHERE id=:id");
                $q->bindValue(":id", $u->id, PDO::PARAM_INT);
@@ -33,44 +41,43 @@ final class Users {
                return array('id' => $u->id, 'name' => ucfirst($u->name), 'picture'=> $u->picture);
           }
 
+          // Dans les autres cas on renvoi null
           return null;
      }
 
+     /**
+      * Méthode pour recuperer la liste des utilisateurs
+      */
      public static function getOnlineUsersList() {
-
+          // On récupère l'objet database
           $db = Database::getInstance();
 
+          // On récupère la liste de tous les utilisateurs
           $q = $db->prepare("SELECT id, name, picture, last_login FROM users");
           $q->execute();
-          $u = $q->fetchAll(PDO::FETCH_ASSOC);
+          $userList = $q->fetchAll(PDO::FETCH_ASSOC);
 
-          if (!empty($u)) {
-               for($i = 0; $i < count($u); $i++) {
-                    if ((time() - $u[$i]['last_login']) < 300) {
-                         $u[$i]['logged_in'] = true;
+          // Si notre liste n'est pas vide
+          if (!empty($userList)) {
+               // Pour chaque utilisateur, si le temps de derninère connexion est inférieur
+               // à 5 minutes (300 secondes) on considère qu'il est connecté
+               for($i = 0; $i < count($userList); $i++) {
+                    if ((time() - $userList[$i]['last_login']) < 300) {
+                         $userList[$i]['logged_in'] = true;
                     }
                     else {
-                         $u[$i]['logged_in'] = false;
+                         $userList[$i]['logged_in'] = false;
                     }
+                    
+                    // On met la premiere lettre du nom on majuscule
+                    $userList[$i]['name'] = ucfirst($userList[$i]['name']);
                }
 
-               return $u;
+               // On retourne la liste des utilisateurs
+               return $userList;
           }
-          return null;
-     }
-     public static function getOnlineUsersCount(){
-          $db = Database::getInstance();
-
-          $q = $db->prepare("SELECT id, last_login FROM users");
-          $q->execute();
-          $u = $q->fetchAll();
-
-          $count = 0;
-
-          foreach ($u as $user) {
-               if ((time() - $user->last_login) < 300) $count++;
-          }
-
-          return array('count' => $count);
+          
+          // Sinon un tableau vide
+          return array();
      }
 }
