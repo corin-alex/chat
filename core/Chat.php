@@ -52,6 +52,7 @@ final class Chat {
           $q->bindValue(":msg", trim(strip_tags($msg)), PDO::PARAM_STR);
           $q->bindValue(":currentTime", time(), PDO::PARAM_INT);
           $q->execute();
-
+          
+          Users::updateLastLogin($userId);
      }
 }

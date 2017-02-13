@@ -33,16 +33,21 @@ final class Users {
           // Si l'user et le mdp correspondent, on met à jour le temps de dernière connexion
           // et on renvoi les infos concernant l'utilisateur
           if (!empty($u)) {
-               $q = $db->prepare("UPDATE users SET last_login=:currentTime WHERE id=:id");
-               $q->bindValue(":id", $u->id, PDO::PARAM_INT);
-               $q->bindValue(":currentTime", time(), PDO::PARAM_INT);
-               $q->execute();
-
+               self::updateLastLogin($u->id);
                return array('id' => $u->id, 'name' => ucfirst($u->name), 'picture'=> $u->picture);
           }
 
           // Dans les autres cas on renvoi null
           return null;
+     }
+     
+     public static function updateLastLogin($uid) {
+          $db = Database::getInstance();
+          
+          $q = $db->prepare("UPDATE users SET last_login=:currentTime WHERE id=:id");
+          $q->bindValue(":id", $uid, PDO::PARAM_INT);
+          $q->bindValue(":currentTime", time(), PDO::PARAM_INT);
+          $q->execute();
      }
 
      /**
