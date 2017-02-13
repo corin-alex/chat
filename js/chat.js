@@ -63,11 +63,11 @@ function login() {
                
                $("#sidebar header").html(headerContent);
                $("#userSelect").val(msg.id);
+               getOnlineUsersList();
+               
                $("#login-panel").fadeOut('fast', function() {
                     $("#chatbody").delay(500).fadeIn('slow');
                });
-               
-               getOnlineUsersList();
           }
      });
 }
@@ -85,8 +85,19 @@ function getOnlineUsersList() {
                if(msg){
                     var result = '<ul class="userlist"><li>Utilisateurs enregistrés</li>';
                     var count = 0;
+                    
+                    var currentUser = $("#userSelect").val();
+                    
                     for (var i = 0; i < msg.length; i++) {
-                
+                         // Si utilisateur courrant
+                         if (currentUser ==  msg[i].id) {
+                              // Si non connecté, on cache le chat
+                              if (!msg[i].logged_in) {
+                                   $("#chatbody").fadeOut('fast');
+                                   $("#login-panel").delay(500).fadeIn('fast');
+                              }
+                         }
+                         
                          if (msg[i].logged_in)  {
                               result += '<li class="user_online"><span class="bull bull_online"></span>';
                               count++;

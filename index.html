@@ -9,14 +9,12 @@
           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 
           <script type="text/javascript">
-               $().ready(function() {
-                    getMessages();
-                    
+               $().ready(function() {        
                     // Refresh messages
                     setInterval(getMessages, 4000);
                     
                     // Refresh liste utilisateurs
-                    setInterval(getOnlineUsersList, 5000);
+                    setInterval(getOnlineUsersList, 6000);
                     
                     // Evenements input (touche enter)
                     $("#msgInput").keyup(function(e) {

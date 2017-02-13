@@ -22,6 +22,7 @@
      * Refonte graphique
      * Ajout liste utilisateurs
      * Optimisation de certaines parties du code
+     * Ajout déconnexion automatique après période d'inactivité 
      
 * **10/02/2017**
      * Envoi des messages
