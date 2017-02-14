@@ -37,10 +37,26 @@ final class Chat {
 
                $messages[$i]->time = date("d/m H:i", $messages[$i]->time);
 
+
+               // Emoticones
+               $messages[$i]->text = self::emoticons($messages[$i]->text);
           }
 
           // On retourne le resultat au format json
           return json_encode($messages);
+     }
+
+     public static function emoticons($str) {
+          $db = Database::getInstance();
+          $q = $db->prepare("SELECT txt, img FROM emoticons");
+          $q->execute();
+          $icons = $q->fetchAll();
+
+          foreach ($icons as $icon) {
+               $str = str_ireplace($icon->txt, '<img class="emoticon" src="' . $icon->img . '">', $str);
+          }
+
+          return $str;
      }
 
      public static function sendMessage($userId, $msg) {
@@ -52,7 +68,7 @@ final class Chat {
           $q->bindValue(":msg", trim(strip_tags($msg)), PDO::PARAM_STR);
           $q->bindValue(":currentTime", time(), PDO::PARAM_INT);
           $q->execute();
-          
+
           Users::updateLastLogin($userId);
      }
 }
