@@ -28,6 +28,12 @@ body {
      min-height: 3em;
 }
 
+#msg_list li img {
+	max-width: 48px;
+	max-height: 48px;
+	border-radius: 10%;
+}
+
 #msg_list em {
      color: #888;
      font-size: 0.8em;
@@ -150,6 +156,6 @@ li.user_online {
 }
 
 .emoticon {
-	max-width: 32px;
-	max-height: 32px;
+	width: 32px;
+	height: 32px;
 }
