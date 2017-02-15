@@ -18,6 +18,13 @@
 * PDO
 
 ## Changelog
+* **15/02/2017**
+     * Ajout emoticones
+	 * Ajout support commandes
+	 * Classement utilisateurs connectés
+	 * Amélioration affichage
+	 * Correction faille injection html
+
 * **13/02/2017**
      * Refonte graphique
      * Ajout liste utilisateurs
