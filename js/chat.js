@@ -32,18 +32,29 @@ function getMessages() {
  * Fonction pour envoyer un message
  */
 function sendMessage() {
-     $.ajax({
-          type:"GET",
-          url:"ajax.php",
-          dataType:"json",
-          data: {"action": "sendMessage",
-                 "user": $("#userSelect").val(),
-                 "msg": $("#msgInput").val().trim()},
-          success: function() {
-               getMessages();
-               $("#msgInput").val("");
-          }
-     });
+    var msg = $("#msgInput").val().trim();
+
+    if(msg.charAt(0) == '/') {
+        if (msg == '/github') {
+            $('#msgInput').val("https://github.com/corin-alex/chat");
+        }
+    }
+    else {
+        $.ajax({
+             type:"GET",
+             url:"ajax.php",
+             dataType:"json",
+             data: {"action": "sendMessage",
+                    "user": $("#userSelect").val(),
+                    "msg": msg},
+             success: function() {
+                  getMessages();
+                  $("#msgInput").val("");
+             }
+        });
+    }
+
+
 }
 
 /**

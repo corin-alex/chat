@@ -52,8 +52,19 @@ final class Chat {
           $q->execute();
           $icons = $q->fetchAll();
 
+          // On ajoute un espace pour prendre en compte l'émoticone
+          $str .= " ";
+
+          // On traite les icones une par une
           foreach ($icons as $icon) {
-               $str = str_ireplace($icon->txt, '<img class="emoticon" src="' . $icon->img . '">', $str);
+        // Si la premiere lettre du msg est ":"
+                if ($str[0]==":") {
+                    // Alr on remplace la chaine par une emoticone
+                    $str = str_ireplace( $icon->txt . ' ', '<img class="emoticon" src="' . $icon->img . '">', $str);
+                }
+                else {  // On remplace le txt par l'emoticone si il y a un espace avant
+                    $str = str_ireplace(' ' . $icon->txt .' ', '<img class="emoticon" src="' . $icon->img . '">', $str);
+                }
           }
 
           return $str;

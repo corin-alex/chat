@@ -13,7 +13,7 @@ final class Users {
           $q->bindValue(":name", strtolower($name), PDO::PARAM_STR);
           $q->execute();
           $u = $q->fetch();
-          
+
           // Si il n'existe pas, on le crée
           if (empty($u)) {
                $q = $db->prepare("INSERT INTO users (`name`, `password`, `picture`, `last_login`) VALUES (:name, :password, '', :currentTime)");
@@ -40,10 +40,10 @@ final class Users {
           // Dans les autres cas on renvoi null
           return null;
      }
-     
+
      public static function updateLastLogin($uid) {
           $db = Database::getInstance();
-          
+
           $q = $db->prepare("UPDATE users SET last_login=:currentTime WHERE id=:id");
           $q->bindValue(":id", $uid, PDO::PARAM_INT);
           $q->bindValue(":currentTime", time(), PDO::PARAM_INT);
@@ -57,8 +57,8 @@ final class Users {
           // On récupère l'objet database
           $db = Database::getInstance();
 
-          // On récupère la liste de tous les utilisateurs
-          $q = $db->prepare("SELECT id, name, picture, last_login FROM users");
+          // On récupère la liste de tous les utilisateurs en les classant par ordre de derniere connexion 
+          $q = $db->prepare("SELECT id, name, picture, last_login FROM users ORDER BY last_login DESC");
           $q->execute();
           $userList = $q->fetchAll(PDO::FETCH_ASSOC);
 
@@ -73,7 +73,7 @@ final class Users {
                     else {
                          $userList[$i]['logged_in'] = false;
                     }
-                    
+
                     // On met la premiere lettre du nom on majuscule
                     $userList[$i]['name'] = ucfirst($userList[$i]['name']);
                }
@@ -81,7 +81,7 @@ final class Users {
                // On retourne la liste des utilisateurs
                return $userList;
           }
-          
+
           // Sinon un tableau vide
           return array();
      }
