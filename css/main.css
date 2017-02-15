@@ -178,7 +178,7 @@ main #emoticon{
 
 #emoticon {
 	position: absolute;
-	background: #FFF;
+	background: rgba(255,255,255,0.8);
 	padding: 1em;
 	border-radius: 10px;
 	border: 1px solid #CCC;
@@ -191,4 +191,13 @@ main #emoticon{
 
 #emoticon img {
 	margin: 0.25em;
+	cursor: pointer;
+	opacity: 0.6;
+	transition: ease 0.3s;
+}
+
+#emoticon img:hover {
+	opacity: 1;
+	width: 40px;
+	height: 40px;
 }

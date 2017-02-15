@@ -86,14 +86,14 @@ final class Chat {
 
           $db = Database::getInstance();
 
-          $q = $db->prepare("SELECT img FROM emoticons");
+          $q = $db->prepare("SELECT txt, img FROM emoticons");
           $q->execute();
           $emos = $q->fetchAll();
 
           $listemo = "";
 
           foreach ($emos as $emo) {
-               $listemo .= '<img class="emoticon" src="' . $emo->img . '">';
+               $listemo .= '<img onclick="actionEmo(\'' . $emo->txt . '\');" class="emoticon" src="' . $emo->img . '">';
           }
           return $listemo;
      }
