@@ -17,7 +17,7 @@ final class Users {
           // Si il n'existe pas, on le crée
           if (empty($u)) {
                $q = $db->prepare("INSERT INTO users (`name`, `password`, `picture`, `last_login`) VALUES (:name, :password, '', :currentTime)");
-               $q->bindValue(":name", trim(strtolower($name)), PDO::PARAM_STR);
+               $q->bindValue(":name", trim(strip_tags(strtolower($name))), PDO::PARAM_STR);
                $q->bindValue(":password", sha1($password), PDO::PARAM_STR);
                $q->bindValue(":currentTime", time(), PDO::PARAM_INT);
                $q->execute();
@@ -57,7 +57,7 @@ final class Users {
           // On récupère l'objet database
           $db = Database::getInstance();
 
-          // On récupère la liste de tous les utilisateurs en les classant par ordre de derniere connexion 
+          // On récupère la liste de tous les utilisateurs en les classant par ordre de derniere connexion
           $q = $db->prepare("SELECT id, name, picture, last_login FROM users ORDER BY last_login DESC");
           $q->execute();
           $userList = $q->fetchAll(PDO::FETCH_ASSOC);
