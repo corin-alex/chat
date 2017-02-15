@@ -15,7 +15,7 @@ function getMessages() {
                          var picture = msg[i].author.picture;
                          var text = msg[i].text;
                          var time = msg[i].time;
-                         
+
                          result += '<li><div class="msg_avatar">';
                          result += (picture) ? '<img src="' + picture + '">' : '<img src="img/48x48.png">';
                          result += '</div><div class="msg_content"><strong>' + name + "</strong> - <em>" + time + "</em><br>" + text + "<br><br></div></li>";
@@ -60,11 +60,11 @@ function login() {
           success: function(msg) {
                var headerContent = "<span>" + msg.name + "</span>";
                headerContent += (msg.picture) ? '<img src="' + msg.picture + '">' : '<img src="img/48x48.png">';
-               
+
                $("#sidebar header").html(headerContent);
                $("#userSelect").val(msg.id);
                getOnlineUsersList();
-               
+
                $("#login-panel").fadeOut('fast', function() {
                     $("#chatbody").delay(500).fadeIn('slow');
                });
@@ -85,9 +85,9 @@ function getOnlineUsersList() {
                if(msg){
                     var result = '<ul class="userlist"><li>Utilisateurs enregistrés</li>';
                     var count = 0;
-                    
+
                     var currentUser = $("#userSelect").val();
-                    
+
                     for (var i = 0; i < msg.length; i++) {
                          // Si utilisateur courrant
                          if (currentUser ==  msg[i].id) {
@@ -97,7 +97,7 @@ function getOnlineUsersList() {
                                    $("#login-panel").delay(500).fadeIn('fast');
                               }
                          }
-                         
+
                          if (msg[i].logged_in)  {
                               result += '<li class="user_online"><span class="bull bull_online"></span>';
                               count++;
@@ -111,6 +111,19 @@ function getOnlineUsersList() {
                     result += "</ul>";
                     $("#onlineuser").html(result);
                     $("#sidebar footer").html("Utilisateurs en ligne : " + count);
+               }
+          }
+     });
+}
+function getListemo() {
+     $.ajax({
+          type:"GET",
+          url:"ajax.php",
+          dataType:"text",
+          data: {"action": "getListemo"},
+          success: function(emo) {
+               if(emo){
+                    $("#emoticon").html(emo);
                }
           }
      });

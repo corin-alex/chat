@@ -10,6 +10,7 @@ body {
 	text-align: center;
 }
 
+
 #chatbody {
      height: 100%;
 	display: none;
@@ -78,6 +79,8 @@ body {
 
 #sidebar section {
 	height: calc(100% - 8em);
+	overflow:scroll;
+	overflow-x: hidden;
 }
 
 main {
@@ -158,4 +161,7 @@ li.user_online {
 .emoticon {
 	width: 32px;
 	height: 32px;
+}
+#emo button{
+	float: left;
 }

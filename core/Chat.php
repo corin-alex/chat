@@ -71,4 +71,19 @@ final class Chat {
 
           Users::updateLastLogin($userId);
      }
+     public static function getListemo(){
+
+          $db = Database::getInstance();
+
+          $q = $db->prepare("SELECT img FROM emoticons");
+          $q->execute();
+          $emos = $q->fetchAll();
+
+          $listemo = "";
+
+          foreach ($emos as $emo) {
+               $listemo .= '<img class="emoticon" src="' . $emo->img . '">';
+          }
+          return $listemo;
+     }
 }

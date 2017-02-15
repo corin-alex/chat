@@ -47,6 +47,9 @@ switch ($_GET['action']) {
      case 'getOnlineUsersList' :
           echo json_encode(Users::getOnlineUsersList());
           break;
+     case 'getListemo' :
+          echo (Chat::getListemo());
+          break;
      default :
           showError("Action invalide");
 }

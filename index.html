@@ -7,15 +7,15 @@
           <script type="text/javascript" src="js/bootstrap.min.js"></script>
           <script type="text/javascript" src="js/chat.js"></script>
           <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
+          <link rel="stylesheet" href="css/font-awesome.min.css">
           <script type="text/javascript">
-               $().ready(function() {        
+               $().ready(function() {
                     // Refresh messages
                     setInterval(getMessages, 4000);
-                    
+
                     // Refresh liste utilisateurs
                     setInterval(getOnlineUsersList, 6000);
-                    
+
                     // Evenements input (touche enter)
                     $("#msgInput").keyup(function(e) {
                          if(e.keyCode  == 13) {
@@ -27,6 +27,10 @@
                          if(e.keyCode  == 13) {
                               login();
                          }
+                    });
+                    getListemo();
+                    $("#emo").click(function(){
+                         $("#emoticon").fadeToggle();
                     });
                });
           </script>
@@ -51,13 +55,13 @@
                     <section id="onlineuser"></section>
                     <footer>Utilisateurs en ligne : 0</footer>
                </section>
-   
+
                <main>
                     <header>
                          <img src="img/logo.png" alt="Virtual Pony 2000">
                          <strong>Alpha 3</strong>
                     </header>
-     
+
                     <section>
                               <ul id="msg_list">
                               </ul>
@@ -67,8 +71,10 @@
                                    </div>
                               </div>
                     </section>
-     
+
                     <div id="form-input" >
+                    <div id ="emoticon"></div>
+                         <button id="emo"><i class="fa fa-smile-o" aria-hidden="true"></i></button>
                          <input id="msgInput" class="form-control" type="text">
                     </div>
                </main>
