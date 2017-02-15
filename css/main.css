@@ -167,10 +167,28 @@ main #emoticon{
 	position: absolute;
 
 }
-main #emo{
+#emo{
 	position: absolute;
-	right: 0.5em;
+	right: 20px;
+	bottom: 10px;
 	background: none;
 	border: none;
 	font-size: 1.5em;
+}
+
+#emoticon {
+	position: absolute;
+	background: #FFF;
+	padding: 1em;
+	border-radius: 10px;
+	border: 1px solid #CCC;
+	width: 400px;
+	height: 300px;
+	right: 2em;
+	bottom: 4em;
+	text-align: center;
+}
+
+#emoticon img {
+	margin: 0.25em;
 }
