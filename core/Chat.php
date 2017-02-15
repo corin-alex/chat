@@ -58,7 +58,7 @@ final class Chat {
           // On traite les icones une par une
           foreach ($icons as $icon) {
         // Si la premiere lettre du msg est ":"
-                if ($str[0]==":") {
+                if ($str[0] == ":" or $str[0] == ";") {
                     // Alr on remplace la chaine par une emoticone
                     $str = str_ireplace( $icon->txt . ' ', '<img class="emoticon" src="' . $icon->img . '">', $str);
                 }

@@ -143,4 +143,5 @@ function getListemo() {
 function actionEmo(txt) {
      var newVal = $('#msgInput').val() + ' ' + txt + ' ';
      $('#msgInput').val(newVal);
+     $('#msgInput').focus();
 }
