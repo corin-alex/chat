@@ -162,6 +162,15 @@ li.user_online {
 	width: 32px;
 	height: 32px;
 }
-#emo button{
-	float: left;
+main #emoticon{
+	display: none;
+	position: absolute;
+
+}
+main #emo{
+	position: absolute;
+	right: 0.5em;
+	background: none;
+	border: none;
+	font-size: 1.5em;
 }
